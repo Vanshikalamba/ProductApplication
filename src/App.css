@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+}
+
+.sidebar {
+  background-color: #333;
+  color: white;
+  width: 200px;
+  padding: 20px;
+  margin-top: 10px;
+  height: 100%;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.second {
+  position: fixed;
+  top: 30px;
+}
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 250px;
+}
+
+.navbar {
+  background-color: #0078ff;
+  color: white;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  padding: 5px 5px;
+  position: absolute;
+  width: 99%;
+  z-index: 1;
+  align-items: center;
+}
+
+.menu-icon {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.content {
+  padding: 20px;
+}
+
+.profile-icon {
+  cursor: pointer;
+}
