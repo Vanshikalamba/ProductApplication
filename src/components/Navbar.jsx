@@ -39,7 +39,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
               profileOpen ? "block" : "hidden"
             }`}
           >
-            <ul className="text-center">
+            <ul className="text-center bg-gray-800">
               <li className="">Profile</li>
               <li>Orders</li>
               <li>Logout</li>
