@@ -35,11 +35,11 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
             <FaUserCircle className="w-6 h-6 mt-1" />
           </button>
           <div
-            className={`z-10 absolute rounded-lg shadow w-32 top-full  mt-8 right-0 text-black ${
+            className={`z-10 absolute rounded-lg shadow w-32 top-full mt-1 right-0 text-black ${
               profileOpen ? "block" : "hidden"
             }`}
           >
-            <ul className="text-center bg-gray-800">
+            <ul className="text-center bg-gray-800 text-white rounded">
               <li className="">Profile</li>
               <li>Orders</li>
               <li>Logout</li>
