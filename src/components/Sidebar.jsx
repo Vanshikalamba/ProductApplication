@@ -20,7 +20,7 @@ const Sidebar = ({ sidebarOpen }) => {
           <li className=" mb-2 rounded hover:shadow hover:bg-gray-300 py-2 mx-2 px-1">
             <Link to="/product-detail">
               <FaProductHunt className="inline black w-6 h-6 mr-2 -mt-2" />{" "}
-              Product Deatils
+              Product Details
             </Link>
           </li>
           <li className=" mb-2 rounded hover:shadow hover:bg-gray-300 py-2 mx-2 px-1">
