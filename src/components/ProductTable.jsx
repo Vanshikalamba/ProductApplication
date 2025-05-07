@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { Table } from "antd";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaFilter } from "react-icons/fa";
 import { FaArrowDownWideShort } from "react-icons/fa6";
 const ProductTable = ({ result }) => {
   const [active, setActive] = useState(0);
   const [sortType, setSortType] = useState("asc");
   const [paginatedData, setPaginatedData] = useState([]);
+  const [showCategorydialog, setShowCategorydialog] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const categoryList = [...new Set(result.map((item) => item.category))];
+  //console.log(categoryList);
   const dataPerPage = 6;
   const handlePrev = () => {
     if (active > 0) setActive((prev) => prev - 1);
@@ -24,12 +28,19 @@ const ProductTable = ({ result }) => {
   };
 
   const totalPage = Math.ceil(result.length / dataPerPage);
-  const start = active * dataPerPage;
-  const end = start + dataPerPage;
-  const pagedData = result.slice(start, end);
+
   useEffect(() => {
+    let filtered = result;
+    if (selectedCategories.length > 0) {
+      filtered = result.filter((item) =>
+        selectedCategories.includes(item.category)
+      );
+    }
+    const start = active * dataPerPage;
+    const end = start + dataPerPage;
+    const pagedData = filtered.slice(start, end);
     setPaginatedData(pagedData);
-  }, [active]);
+  }, [active, selectedCategories, result]);
 
   return (
     <div className="flex flex-col items-center">
@@ -71,7 +82,45 @@ const ProductTable = ({ result }) => {
               </th>
               <th className="w-[15em]">Discounted Price</th>
               <th className="w-[15em]">Brand</th>
-              <th className="w-[15em]">Category</th>
+
+              <th className="w-[15em] flex justify-center">
+                <span>Category</span>
+                <span className="cursor-pointer p-2 hover:bg-gray-400 hover: rounded-xl">
+                  <FaFilter
+                    onClick={() => setShowCategorydialog(!showCategorydialog)}
+                  />
+                </span>
+                {showCategorydialog && (
+                  <div className="absolute top-39 right-20 bg-white border shadow-md p-2 z-50 w-50 text-left">
+                    <div>Select Category</div>
+                    <div className="m-2">
+                      {categoryList.map((cat) => (
+                        <div>
+                          <input
+                            type="checkbox"
+                            checked={selectedCategories.includes(cat)}
+                            onChange={() => {
+                              setSelectedCategories((prev) =>
+                                prev.includes(cat)
+                                  ? prev.filter((item) => item !== cat)
+                                  : [...prev, cat]
+                              );
+                            }}
+                          />
+                          <label>{cat}</label>
+                        </div>
+                      ))}
+                    </div>
+                    <button
+                      className="bg-gray-300 rounded-md p-1"
+                      onClick={() => setShowCategorydialog(false)}
+                    >
+                      Apply Changes
+                    </button>
+                  </div>
+                )}
+              </th>
+
               <th className="w-[15em]">Image</th>
             </tr>
           </thead>
